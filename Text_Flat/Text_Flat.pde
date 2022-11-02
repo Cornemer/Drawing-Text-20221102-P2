@@ -1,7 +1,8 @@
 //Global Variables
-int appWidth, appHeight;
+int appWidth, appHeight, fontSize;
 float titleX, titleY, titleWidth, titleHeight;
 String title = "Wahoo!";
+PFont titleFont;
 //
 size(500, 600); //Portrait
 //Copy Display Algorithm
@@ -18,7 +19,14 @@ titleHeight = appHeight * 1/10;
 //Fonts from OS (Operating System)
 String[] fontList = PFont.list(); //To list all fonts available
 printArray(fontList); //for listing all possible fonts to choose from
-titleFont = createFont(); //Verified the font exists in processing.JAVA
+titleFont = createFont("MaturaMTScriptCapitals", 55); //Verified the font exists in processing.JAVA
 //Tools / Create Font / Find Font / Do nor ptress "OK", known bug
 //
+//Layout or text space and typographical feature
 rect(titleX, titleY, titleWidth, titleHeight);
+//
+//Repeated Executed Code
+fill(blue);
+fontSize = 50;
+textFont(titleFont, fontSize);
+text( title, titleX, titleY, titleWidth, titleHeight );

@@ -1,36 +1,78 @@
 //Global Variables
 int appWidth, appHeight, fontSize;
 float titleX, titleY, titleWidth, titleHeight;
-String title = "Wahoo!";
+float footerX, footerY, footerWidth, footerHeight;
+String title = "Goober", footer="Goober";
 PFont titleFont;
-color blue=#73A1DB, resetDefaultInk=#FFFFFF; //not Night Mode friendly
+color blue=#84A4CB, resetDefaultInk=#FFFFFF; //not Night Mode Friendly
 //
-size(500, 600); //Portrait
-//Copy Display Algorithm
-appWidth = width;
-appHeight = height;
+void setup()
+{
+  size(500, 600); //Portrait
+  //Copy Display Algorithm
+  //Concatenation
+  println("\t\t\tWidth="+width, "\tHeight="+height); //key variables
+  println("Display Monitor:", "\twidth="+displayWidth, "& height="+displayHeight);
+  //
+  //Ternary Operator
+  String ls="Landscape or Square", p="portrait", DO="Display Orientation", instruct="Bru, turn your phun";
+  //String orientation = ( appWidth >= appHeight ) ? ls : p;
+  //println (DO, orientation);
+  if ( appWidth < appHeight ) { //Declare Landscape Mode
+    println(instruct);
+  } else {
+    //Fit CANVAS into Display Monitor
+    if ( appWidth > displayWidth ) appWidth = 0; //CANVAS-width will not fit
+    if ( appHeight > displayHeight ) appHeight = 0; //CANVAS-height will not fit
+    if ( appWidth != 0 && appHeight != 0 ) {
+      print("Display Geoemtry is Good to Go.");
+    } else {
+      println("STOP, is broken");
+    }
+  }
+  //
+  //If ORIENTATION is wrong ... feedback to change it
+  //if ( orientation==p ) println(instruct);
+  //
+  appWidth = width;
+  appHeight = height;
+  //
+  //Population
+  titleX = footerX = appWidth * 1/4;
+  titleY = appHeight * 1/10;
+  footerY = appHeight * 8/10;
+  titleWidth = footerWidth = appWidth * 1/2;
+  titleHeight = footerHeight = appHeight * 1/10;
+  //
+  //Text Setup, single executed code
+  //Fonts from OS (Operating System)
+  String[] fontList = PFont.list(); //To list all fonts available
+  printArray(fontList); //For listing all possible fonts to choose from, then createFont
+  titleFont = createFont("Rockwell", 55); //Verified the font exists in Processing.JAVA
+  // Tools / Create Font / Find Font / Do not press "OK", known bug
+  //
+  //Layout or text space and typographical features
+  rect(titleX, titleY, titleWidth, titleHeight);
+  rect(footerX, footerY, footerWidth, footerHeight);
+  //
+}//End setup
 //
-//Population
-titleX = appWidth * 1/4;
-titleY = appHeight * 1/10;
-titleWidth = appWidth * 1/2;
-titleHeight = appHeight * 1/10;
-//
-//Text Setup, single executed code
-//Fonts from OS (Operating System)
-String[] fontList = PFont.list(); //To list all fonts available
-printArray(fontList); //for listing all possible fonts to choose from
-titleFont = createFont("Harrington", 55); //Verified the font exists in processing.JAVA
-//Tools / Create Font / Find Font / Do nor ptress "OK", known bug
-//
-//Layout or text space and typographical feature
-rect(titleX, titleY, titleWidth, titleHeight);
-//
-//Repeated Executed Code
+void draw() {
+  //Repeated Executed Code
 fill(blue);
 textAlign(CENTER, CENTER);
 //Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
 fontSize = 50; //Largest size given window
 textFont(titleFont, fontSize);
 text( title, titleX, titleY, titleWidth, titleHeight );
+textAlign(CENTER, BOTTOM);
+//Values: [ LEFT | CENTER | RIGHT ] & [ TOP | CENTER | BOTTOM | BASELINE ]
+text( footer, footerX, footerY, footerWidth, footerHeight );
 fill(resetDefaultInk);
+}//End draw
+//
+void keyPressed() {}//End keyPressed
+//
+void mousePressed() {}//End mousePressed
+//
+//End Main Program
